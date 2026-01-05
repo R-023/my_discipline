@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Дисциплина · {{ streak }} дней</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Моя дисциплина</h1>
+        <div class="streak">
+            🔥 <strong>{{ streak }}</strong> дней подряд
+        </div>
+
+        <form method="post" action="/mark" style="margin: 20px 0;">
+            <button type="submit" class="mark-btn">✅ Отметить сегодняшний день</button>
+        </form>
+
+        <div class="calendar">
+            <h2>{{ year }} / {{ month }}</h2>
+            <div class="days-grid">
+                {% for day_str, success in month_data.items() %}
+                    <div class="day {{ 'success' if success else '' }} {{ 'today' if day_str == today else '' }}">
+                        {{ day_str.split('-')[2] }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <p class="note">
+            Успешный день = соблюдение правил, независимо от результата.
+        </p>
+    </div>
+</body>
+</html>
